@@ -44,4 +44,5 @@ def monthly_challenges(request, month):
             "month" : month
         })
     except:
-        return HttpResponseNotFound("<h2> This month is not supported yet! </h2>")
+        error_response=render_to_string("404.html")
+        return HttpResponseNotFound(error_response)

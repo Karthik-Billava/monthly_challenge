@@ -39,9 +39,11 @@ def monthly_challenges_int(request, month):
 
 
 def monthly_challenges(request, month):
-    # try:
+    try:
         challenge_text = monthly_challenge[month]
-        respose_text=f"<h2>{challenge_text}</h2>"
-        return render(request,"challenges/challenge.html")
-    # except:
+        return render(request,"challenges/challenge.html",{
+            "text" : challenge_text,
+            "month" : month
+        })
+    except:
         return HttpResponseNotFound("<h2> This month is not supported yet! </h2>")

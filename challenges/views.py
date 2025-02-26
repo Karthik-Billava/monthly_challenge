@@ -21,12 +21,10 @@ monthly_challenge = {
 }
 
 def index(request):
-    response_data="<h1>Monthly challenges</h1>\n<ul>\n"
-    for month,challenge in monthly_challenge.items():
-        path=reverse("challenge-month",args=[month])
-        response_data+=f"<li><a href={path}>{month.capitalize()}</li>\n"
-    response_data+="</ul>"
-    return HttpResponse(response_data)
+    months = list(monthly_challenge.keys())
+    return render(request,"challenges/index.html",{
+        "months" : months
+    })
 
 
 def monthly_challenges_int(request, month):

@@ -19,6 +19,14 @@ monthly_challenge = {
     "december": None
 }
 
+def index1(request):
+    response_data="<h1>Monthly challenges</h1>\n<ul>"
+    for month,challenge in monthly_challenge.items():
+        path=reverse("challenge-month",args=[month])
+        response_data+=f"<li><a href={path}>{month}</li>\n"
+    response_data+="</ul>"
+    return HttpResponse(response_data)
+
 
 def monthly_challenges_int(request, month):
     months = list(monthly_challenge.keys())
@@ -32,6 +40,7 @@ def monthly_challenges_int(request, month):
 def monthly_challenges(request, month):
     try:
         challenge_text = monthly_challenge[month]
-        return HttpResponse(challenge_text)
+        respose_text=f"<h2>{challenge_text}</h2>"
+        return HttpResponse(respose_text)
     except:
-        return HttpResponseNotFound("This month is not supported yet!")
+        return HttpResponseNotFound("<h2> This month is not supported yet! </h2>")
